@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-smooth: subpixel-antialiased;
+}
+
+@font-face {
+  font-family: CircularSp;
+  src: url(../assets/fonts/CircularSp-Book-4eaffdf96f4c6f984686e93d5d9cb325.ttf);
+}
+@font-face {
+  font-family: CircularSpTitle;
+  src: url(../assets/fonts/CircularSpTitle-Bold-2fbf72b606d7f0b0f771ea4956a8b4d6.ttf);
+}
+@font-face {
+  font-family: CircularSpy;
+  src: url(../assets/fonts/CircularSp-Book-4eaffdf96f4c6f984686e93d5d9cb325.ttf);
+}
+a {
+  color: #ffffff;
+  display: inline-block;
+  transition: all 100ms ease;
+  position: relative;
+}
+a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  visibility: hidden;
+}
+a:is(:active, :hover) {
+  color: #20c95b;
+}
+a:is(:active, :hover)::after {
+  background-color: #20c95b;
+}
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+a:focus::after {
+  visibility: visible;
+}
+
+header {
+  width: 100%;
+  background-color: #000000;
+  padding: 1.5rem 3rem;
+}
+header svg {
+  width: 7.5rem;
+  height: 3rem;
+}
+
+main {
+  width: 100%;
+  background: linear-gradient(to top, #020202, #1a1a1a);
+  color: #ffffff;
+  font-family: CircularSp;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: "row";
+}
+main section {
+  background-color: #000000;
+  width: 734px;
+  padding: 3rem 3rem;
+  margin-block: 2rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+main section h1.card__title {
+  font-family: CircularSpTitle;
+  font-size: 3rem;
+  margin-block: 2rem 3rem;
+}
+main section div.error-display {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #e91429;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+}
+main section div.error-display i {
+  font-size: 1.5rem;
+}
+main section div.error-display p {
+  font-size: 0.9090909091rem;
+}
+main section div.error-display.hide {
+  display: none;
+}
+main section .cta-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 20rem;
+}
+main section .cta-buttons button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: "row";
+  background: transparent;
+  border: 1px solid #727272;
+  border-radius: 2rem;
+  padding: 0.75rem;
+  margin-bottom: 0.1rem;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.9523809524rem;
+  font-weight: bold;
+  letter-spacing: 0.75px;
+  position: relative;
+  transition: all 100ms ease;
+}
+main section .cta-buttons button > div {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: "row";
+}
+main section .cta-buttons button > div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+main section .cta-buttons button p {
+  width: 80%;
+  word-break: keep-all;
+}
+main section .cta-buttons button::after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 7px);
+  height: calc(100% + 7px);
+  border: 3px solid white;
+  border-radius: inherit;
+  visibility: hidden;
+}
+main section .cta-buttons button:is(:active, :focus, :hover) {
+  border-color: #fff;
+}
+main section .cta-buttons button:is(:active, :focus)::after {
+  visibility: visible;
+}
+main section span.divider {
+  width: 85%;
+  border-top: 0.05px solid #292929;
+  margin-block: 2.5rem 2rem;
+}
+main section form {
+  width: 325px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+main section form div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+  position: relative;
+}
+main section form div label {
+  font-size: 0.8333333333rem;
+  font-weight: bold;
+  letter-spacing: 0.75px;
+  margin-bottom: 0.5rem;
+}
+main section form div input:is([type=text], [type=password]) {
+  width: 100%;
+  background-color: #121212;
+  border: 1px solid #727272;
+  outline: none;
+  border-radius: 5px;
+  padding: 0.9rem;
+  font-size: 0.9523809524rem;
+  font-family: CircularSp;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+main section form div input:is([type=text], [type=password])::-moz-placeholder {
+  color: #a7a7a7;
+  letter-spacing: 0.5px;
+}
+main section form div input:is([type=text], [type=password])::placeholder {
+  color: #a7a7a7;
+  letter-spacing: 0.5px;
+}
+main section form div input:is([type=text], [type=password]):focus {
+  border: 3px solid #fff;
+}
+main section form div input:is([type=text], [type=password]):hover {
+  border-color: #fff;
+  transition: border 100ms linear;
+}
+main section form div input[type=password] ~ i {
+  font-size: 1.25rem;
+  color: #727272;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 2.75rem;
+  right: 0.8em;
+}
+main section form div input[type=password] ~ i.hide {
+  display: none;
+}
+main section form div input[type=password] ~ i:hover {
+  color: #fff;
+}
+main section form div p.error-msg {
+  display: none;
+  align-items: baseline;
+  gap: 5px;
+  color: #f15e6c;
+  font-size: 0.9090909091rem;
+  margin-top: 0.5rem;
+}
+main section form div.error input {
+  border-color: #e91429;
+}
+main section form div.error input:focus {
+  border: 3px solid #e91429;
+}
+main section form div.error p {
+  display: flex;
+}
+main section form div.remember-me {
+  margin-top: 0.5rem;
+}
+main section form div.remember-me label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: "row";
+  justify-content: start;
+  font-weight: normal;
+  font-size: 0.8474576271rem;
+}
+main section form div.remember-me label input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+main section form div.remember-me label span.on-off-btn {
+  width: 32px;
+  height: 16px;
+  background-color: rgb(120, 120, 120);
+  border-radius: 1rem;
+  margin-right: 0.75rem;
+  position: relative;
+  transition: all 200ms ease;
+}
+main section form div.remember-me label span.on-off-btn::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 5px);
+  height: calc(100% + 5px);
+  border: 3px solid white;
+  border-radius: inherit;
+  visibility: hidden;
+}
+main section form div.remember-me label span.on-off-btn .toggler {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  block-size: 12px;
+  inline-size: 12px;
+  border-radius: inherit;
+  background-color: #000;
+  transition: 0.2s ease all;
+}
+main section form div.remember-me label input:checked + span {
+  background-color: #20c95b;
+}
+main section form div.remember-me label input:checked + span > span.toggler {
+  right: 2px;
+  left: auto;
+}
+main section form div.remember-me label input:focus + span::after {
+  visibility: visible;
+}
+main section form button:is([data-log-in], [data-sign-up]) {
+  width: 100%;
+  padding: 0.8rem;
+  margin-block: 1rem 2rem;
+  border: 0;
+  outline: 0;
+  border-radius: 2rem;
+  background: #1fdf64;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 0.9523809524rem;
+  letter-spacing: 0.75px;
+  color: #000;
+  position: relative;
+  transition: all 200ms ease;
+}
+main section form button:is([data-log-in], [data-sign-up])::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 5px);
+  height: calc(100% + 5px);
+  border: 3px solid white;
+  border-radius: inherit;
+  visibility: hidden;
+}
+main section form button:is([data-log-in], [data-sign-up]):hover {
+  transform: scale(1.04);
+}
+main section form button:is([data-log-in], [data-sign-up]):is(:focus, :active)::after {
+  visibility: visible;
+}
+main section p.sign-up {
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=login.css.map */

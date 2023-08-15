@@ -1,0 +1,405 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-smooth: subpixel-antialiased;
+}
+
+@font-face {
+    font-family: CircularSp;
+    src: url(../assets/fonts/CircularSp-Book-4eaffdf96f4c6f984686e93d5d9cb325.ttf);
+}
+
+@font-face {
+    font-family: CircularSpTitle;
+    src: url(../assets/fonts/CircularSpTitle-Bold-2fbf72b606d7f0b0f771ea4956a8b4d6.ttf);
+}
+
+@font-face {
+    font-family: CircularSpy;
+    src: url(../assets/fonts/CircularSp-Book-4eaffdf96f4c6f984686e93d5d9cb325.ttf);
+}
+
+a{
+    color: map-get($color, 'secondary');
+    display: inline-block;
+    transition: all 100ms ease;
+    position: relative;
+    &::after{
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        visibility: hidden;
+    }
+
+    &:is(:active, :hover){
+        color: map-get($color, 'button-bg-hover');  
+
+        &::after{
+            background-color: map-get($color, 'button-bg-hover');
+        }
+    }
+
+    &:focus{
+        outline: none;
+        text-decoration: none;
+
+        &::after{
+            visibility: visible;
+        }
+    }
+}
+
+// //////////////////////////////////////////
+// * H E A D E R
+////////////////////////////////////////////
+header {
+    width: 100%;
+    background-color: map-get($color, "primary");
+    padding: 1.5rem 3rem;
+
+    svg {
+        width: 7.5rem;
+        height: 3rem;
+    }
+}
+
+main {
+    width: 100%;
+    background: map-get($color, "gradient");
+    color: map-get($color, "secondary");
+    font-family: CircularSp;
+    
+    @include center();
+
+    section {
+        background-color: map-get($color, "primary");
+        width: 734px;
+        padding: 3rem 3rem;
+        margin-block: 2rem;
+        border-radius: 10px;
+        @include center(column);
+
+        // Log in to Spotify
+        h1.card__title {
+            font-family: CircularSpTitle;
+            font-size: 3rem;
+            margin-block: 2rem 3rem;
+        }
+
+        // error display
+        div.error-display{
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            
+            background-color: #e91429;
+            
+            padding: .75rem 1rem;
+            margin-bottom: 1.5rem;
+
+            i{
+                font-size: 1.5rem;
+            }
+            p{
+                font-size: calc(1rem / 1.1);
+            }
+
+            &.hide{
+                display: none;
+            }
+        }
+
+        // continue with buttons
+        .cta-buttons {
+            @include center(column);
+            gap: 0.5rem;
+            width: 20rem;
+            
+            button {
+                width: 100%;
+                @include center();
+                
+                background: transparent;
+
+                border: 1px solid map-get($color, "button-brdr");
+                border-radius: 2rem;
+
+                padding: 0.75rem;
+                margin-bottom: 0.1rem;
+
+                color: inherit;
+                font-family: inherit;
+                font-size: calc(1rem / 1.05);
+                font-weight: bold;
+                letter-spacing: 0.75px;
+
+                position: relative;
+                transition: all 100ms ease;
+
+                // icons
+                & > div {
+                    width: 1.4rem;
+                    height: 1.4rem;
+                    @include center();
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+
+                // text-content
+                p {
+                    width: 80%;
+                    word-break: keep-all;
+                }
+
+                // outer-border
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: calc(100% + 7px);
+                    height: calc(100% + 7px);
+                    border: 3px solid white;
+                    border-radius: inherit;
+                    visibility: hidden;
+                }
+
+                // effects
+                &:is(:active, :focus, :hover) {
+                    border-color: #fff;
+                }
+
+                &:is(:active, :focus)::after {
+                    visibility: visible;
+                }
+            }
+        }
+
+        // horizontal divider
+        span.divider {
+            width: 85%;
+            border-top: 0.05px solid map-get($color, "border");
+            margin-block: 2.5rem 2rem;
+        }
+
+        // login with email and password form
+        form {
+            width: 325px;
+            @include center(column);
+
+            div {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin-bottom: 1rem;
+                position: relative;
+
+                label {
+                    font-size: calc(1rem / 1.2);
+                    font-weight: bold;
+                    letter-spacing: 0.75px;
+                    margin-bottom: 0.5rem;
+                }
+
+                input:is([type="text"], [type="password"]) {
+                    width: 100%;
+                    background-color: map-get($color, "input-bg");
+                    
+                    border: 1px solid map-get($color, "button-brdr");
+                    outline: none;
+                    border-radius: 5px;
+                    
+                    padding: 0.9rem;
+                    
+                    font-size: calc(1rem / 1.05);
+                    font-family: CircularSp;
+                    letter-spacing: 1px;
+                    color: map-get($color, "secondary");
+
+                    // transition: border 200ms ease;
+
+                    &::placeholder {
+                        color: #a7a7a7;
+                        letter-spacing: 0.5px;
+                    }
+
+                    &:focus{
+                        border: 3px solid #fff;
+                    }
+
+                    &:hover{
+                        border-color: #fff;
+                        transition: border 100ms linear;
+                    }
+                }
+
+                input[type="password"] ~ i{
+                    font-size: 1.25rem;
+                    color: map-get($color, 'button-brdr');
+
+                    width: 1.5rem;
+                    height: 1.5rem;
+
+                    position: absolute;
+                    top: 2.75rem;
+                    right:.8em;
+
+                    &.hide{
+                        display: none;
+                    }
+
+                    &:hover{
+                        color: #fff;
+                    }
+                }
+
+
+                p.error-msg {
+                    display: none;
+                    align-items: baseline;
+                    gap: 5px;
+                    color: #f15e6c;
+                    font-size: calc(1rem / 1.1);
+                    margin-top: 0.5rem;
+                }
+
+                &.error {
+                    input {
+                        border-color: #e91429;
+
+                        &:focus{
+                            border: 3px solid #e91429;
+                        }
+                    }
+
+                    p {
+                        display: flex;
+                    }
+                }
+            }
+
+            div.remember-me {
+                margin-top: .5rem;
+                label {
+                    @include center();
+                    justify-content: start;
+
+                    font-weight: normal;
+                    font-size: calc(1rem / 1.18);
+
+                    // disappearing checkbox
+                    input {
+                        appearance: none;
+                    }
+
+                    // designing button
+                    span.on-off-btn {
+                        $_height: 16px;
+                        $_width: calc($_height * 2);
+
+                        width: $_width;
+                        height: $_height;
+                        background-color: rgb(120, 120, 120);
+
+                        border-radius: 1rem;
+                        margin-right: .75rem;
+                        position: relative;
+                        transition: all 200ms ease;
+
+                        &::after{
+                            @include getBorder();
+                        }
+
+                        // inner circle
+                        .toggler {
+                            $_spacing: 2px;
+                            $_size: calc($_height - $_spacing * 2);
+
+                            position: absolute;
+                            top: $_spacing;
+                            left: $_spacing;
+                            
+                            block-size: $_size;
+                            inline-size: $_size;
+                            
+                            border-radius: inherit;
+                            
+                            background-color: #000;
+                            transition: 0.2s ease all;
+                        }
+                    }
+
+                    // effects
+                    input:checked + span {
+                        background-color: map-get($color, 'button-bg-hover');
+
+                        & > span.toggler {
+                            right: 2px;
+                            left: auto;
+                        }
+                    }
+
+                    input:focus + span::after{
+                        visibility: visible;
+                    }
+                }
+            }
+
+            // login button 
+            button:is([data-log-in], [data-sign-up]){
+                width: 100%;
+                padding: .8rem;
+                margin-block: 1rem 2rem;
+
+                border: 0;
+                outline: 0;
+                border-radius: 2rem;
+
+                background: map-get($color, 'button-bg');
+
+                font-weight: bold;
+                font-family: inherit;
+                font-size: calc(1rem / 1.05);
+                letter-spacing: .75px;
+                color: #000;
+                
+                position: relative;
+                transition: all 200ms ease;
+
+                &::after{
+                    @include getBorder();
+                }
+
+                &:hover{
+                    transform: scale(1.04);
+                }
+
+                &:is(:focus, :active)::after{
+                    visibility: visible;
+                }
+            }
+        }
+
+        p.sign-up{
+            margin-bottom: 1rem;
+        }
+    }
+}

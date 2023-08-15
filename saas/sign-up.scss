@@ -1,0 +1,450 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+// reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    background: map-get($color, "secondary");
+    font-smooth: subpixel-antialiased;
+}
+
+// including fonts
+@font-face {
+    font-family: CircularSp;
+    src: url(../assets/fonts/CircularSp-Book-4eaffdf96f4c6f984686e93d5d9cb325.ttf);
+}
+
+@font-face {
+    font-family: CircularSpTitle;
+    src: url(../assets/fonts/CircularSpTitle-Bold-2fbf72b606d7f0b0f771ea4956a8b4d6.ttf);
+}
+
+@font-face {
+    font-family: CircularSpy;
+    src: url(../assets/fonts/CircularSp-Book-4eaffdf96f4c6f984686e93d5d9cb325.ttf);
+}
+
+// utilities
+img {
+    width: 1.5rem;
+    aspect-ratio: 1;
+}
+
+// border on focus ==========
+input, button{
+    position: relative;
+    transition: all 200ms ease;
+
+    &::before{
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: calc(100% + 6px);
+        height: calc(100% + 6px);
+        border: 2px solid #000;
+        border-radius: inherit;
+        visibility: hidden;
+    }
+
+    &:focus::before{
+        visibility: visible;
+    }
+}
+
+a{
+    color: map-get($color, 'button-bg');
+
+    &:hover{
+        color: map-get($color, 'button-bg-hover');
+    }
+}
+// ==========================
+
+// * M A I N
+main {
+    width: 28rem;
+    font-family: CircularSp;
+    margin-bottom: 10rem;
+
+    header {
+        @include center();
+        margin-block: 2rem;
+
+        nav svg {
+            width: 7.5rem;
+            height: 3rem;
+        }
+    }
+}
+
+section {
+    .top {
+        padding-inline: 1rem;
+    }
+
+    h1.card__title {
+        font-family: CircularSpTitle;
+        font-size: 1.75rem;
+        font-weight: bolder;
+        // letter-spacing: -1px;
+        text-align: center;
+    }
+
+    .cta-buttons {
+        @include center(column);
+        width: 100%;
+        // background-color: red;
+        padding-inline: 1rem;
+        margin-block: 2rem 1rem;
+
+        button {
+            width: 100%;
+
+            border-radius: 1.5rem;
+            border: none;
+            outline: none;
+
+            @include center();
+            gap: 1rem;
+
+            padding: 0.65rem;
+            margin-bottom: 1rem;
+
+            font-family: inherit;
+            font-weight: bolder;
+            font-size: calc(1rem / 1.01);
+            letter-spacing: 0.75px;
+
+            transform: all 200ms ease;
+
+            &:first-child {
+                background-color: #384f81;
+                color: #fff;
+                img {
+                    filter: invert(1);
+                }
+
+                &:hover {
+                    background-color: #2b3c63;
+                }
+            }
+
+            &:nth-child(2) {
+                border: 2px solid map-get($color, "border");
+            }
+
+            &:is(:hover) {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    .divider {
+        margin-inline: 1.5rem;
+        letter-spacing: 2px;
+        @include center();
+        gap: 1rem;
+        color: #5f5f5f;
+        margin-bottom: 1.5rem;
+
+        span.line {
+            width: 45%;
+            border-top: 1px solid map-get($color, "border");
+        }
+    }
+
+    form {
+        h3 {
+            text-align: center;
+        }
+
+        div.form-control {
+            margin-block: 1rem;
+
+            label {
+                font-size: calc(1rem / 1.2);
+                font-weight: bold;
+                letter-spacing: 0.5px;
+
+                @include center(column);
+                justify-content: start;
+                align-items: flex-start;
+                gap: 0.5rem;
+
+                input[type="email"],
+                input[type="password"],
+                input[type="text"],
+                input[type="number"] {
+                    width: 100%;
+                    padding: 0.75rem 0.75rem;
+
+                    border-radius: 3px;
+                    border: none;
+                    border: 1px solid #333;
+
+                    font-size: calc(1rem / 1.1);
+                    letter-spacing: 0.5px;
+                    font-family: CircularSp;
+                    color: #000;
+
+                    &::placeholder {
+                        color: #333;
+                    }
+                }
+            }
+
+            p.error-msg {
+                display: none;
+                align-items: baseline;
+                gap: 5px;
+                color: #cc4e5b;
+                font-size: calc(1rem / 1.1);
+                margin-top: 0.5rem;
+            }
+
+            &:nth-child(3) {
+                div.password-field {
+                    background-color: #fff;
+                    width: 100%;
+                    @include center();
+                    border: 1px solid #333;
+                    border-radius: 3px;
+
+                    input {
+                        border: none;
+                        outline: none;
+                    }
+
+                    div.password-visibility {
+                        position: relative;
+                        @include center();
+                        width: 2.5rem;
+
+                        i {
+                            font-size: 1.25rem;
+                            position: absolute;
+                            color: rgb(80, 80, 80);
+
+                            &.hide {
+                                display: none;
+                            }
+
+                            &:hover {
+                                transform: scale(1.1);
+                                cursor: pointer;
+                                color: #000;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.error {
+                input {
+                    border-width: 1.5px;
+                    border-color: #f15e6c;
+
+                    &:focus {
+                        outline: 1.5px solid #f15e6c;
+                    }
+                }
+
+                div.password-field {
+                    border-width: 1.5px;
+                    border-color: #f15e6c;
+
+                    &.focusInp {
+                        outline: 1.5px solid #f15e6c;
+                    }
+                }
+
+                p.error-msg {
+                    display: flex;
+                }
+
+                p.info {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+p.info {
+    font-size: calc(1rem / 1.15);
+    margin-top: 0.5rem;
+}
+
+.form-control.dob {
+    .date-of-birth {
+        margin-top: 0.75rem;
+        width: 100%;
+
+        .dob__inputs {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 1.25rem;
+
+            .month {
+                min-width: 13rem;
+
+                select {
+                    width: 100%;
+                    padding: 0.75rem;
+                    border-radius: 3px;
+                    font-size: calc(1rem / 1.1);
+                    letter-spacing: 1px;
+                    font-family: CircularSpy;
+                    margin-top: 0.5rem;
+                }
+
+                &.error select {
+                    border: 1.5px solid #f15e6c;
+                }
+            }
+
+            & > div:nth-child(2),
+            & > div:nth-child(3) {
+                min-width: 6rem;
+            }
+        }
+
+        label {
+            all: unset;
+            font-size: calc(1rem / 1.15);
+            @include center(column);
+            align-items: flex-start;
+
+            input {
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
+
+.form-control.gender-input {
+    .gender__options {
+        display: flex;
+        gap: .3rem 2rem;
+        word-break: keep-all;
+        flex-wrap: wrap;
+        margin-top: .75rem;
+
+        label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            word-break: keep-all;
+            
+            font-weight: normal;
+            font-size: 0.85rem;
+            
+            padding: .3rem;
+            padding-left: 0;
+            
+            input[type="radio"] {
+                appearance: none;
+                width: 1rem;
+                aspect-ratio: 1;
+
+                background-color: #fff;
+                border-radius: 50%;
+                border: 1px solid map-get($color, "border");
+
+                position: relative;
+                transition: all 100ms ease;
+
+                &:hover {
+                    border-color: #169b45;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    border-radius: 50%;
+                    background: inherit;
+                }
+
+                &:checked {
+                    border: none;
+                    &::after {
+                        border: 4px solid #169b45;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.form-control.share-data{
+    display: flex;
+    margin-top: 2rem;
+
+    label{
+        flex-direction: row;
+        align-items: flex-start;
+        gap: .75rem;
+
+        font-weight: normal;
+        font-size: .85rem;
+
+        input{
+            width: 1.25rem;
+            aspect-ratio: 1;
+            accent-color: #169B45;
+            margin-top: 2px;
+        }
+    }
+}
+
+.form__footer{
+    text-align: center;
+    font-size: calc(1rem / 1.16);
+    small{
+        display: block;
+
+        &:nth-child(1){
+            margin-bottom: .5rem;
+        }
+    }
+}
+
+form > button[type="submit"]{
+    display: block;
+    margin-inline: auto;
+    margin-block: .75rem 1.5rem;
+
+    padding: 1rem 3rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: inherit;
+    letter-spacing: .5px;
+
+    border-radius: 2rem;
+    border: none;
+
+    background: map-get($color, 'button-bg');
+
+    &:hover{
+        transform: scale(1.05);
+    }
+}
+
+.redirect-to-login{
+    text-align: center;
+    font-size: calc(1rem / 1.1);
+}
+
